@@ -1,0 +1,22 @@
+.element__image {
+    padding: 0;
+    margin: 0;
+    border-radius: 10px 10px 0px 0px;
+    object-fit: cover;
+    height: 282px;
+    position: relative;
+}
+.element__image:hover {
+    cursor: pointer;
+}
+@media all and (max-width: 1279px){
+    .element__image {
+        max-width: 100%;
+        width: 100%;
+    }
+}
+@media all and (min-width: 1280px){
+    .element__image {
+        width: 282px;
+    }
+}

@@ -1,0 +1,15 @@
+.footer__paragraph {
+    padding-top: 48px;
+    margin: 0;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 22px;
+    color: #545454;
+}
+@media all and (max-width: 900px) {
+    .footer__paragraph {
+        font-size: 14px;
+        line-height: 17px;
+    }
+}

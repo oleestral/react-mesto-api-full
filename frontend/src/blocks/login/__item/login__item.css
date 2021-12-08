@@ -1,0 +1,49 @@
+.login__item {
+  background-color: black;
+  color: #ffffff;
+  border-bottom: 2px solid #cccccc;
+  padding-bottom: 10px;
+  font-style: normal;
+  font-weight: 500;
+  margin-bottom: 30px;
+}
+.login__item::-webkit-input-placeholder {
+  opacity: 1;
+  color: #cccccc;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+}
+.login__item::-moz-placeholder {
+  opacity: 1;
+  color: #cccccc;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+}
+.login__item:-ms-input-placeholder {
+  opacity: 1;
+  color: #cccccc;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+}
+.login__item::-ms-input-placeholder {
+  opacity: 1;
+  color: #cccccc;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+}
+.login__item::placeholder {
+  opacity: 1;
+  color: #cccccc;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+}

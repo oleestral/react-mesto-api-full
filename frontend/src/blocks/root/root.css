@@ -1,0 +1,7 @@
+.root {
+  background-color: black;
+  color: #ffffff;
+  font-family: "Inter", "Arial ", sans-serif;
+  height: 100vh;
+  border: 1px solid black;
+}

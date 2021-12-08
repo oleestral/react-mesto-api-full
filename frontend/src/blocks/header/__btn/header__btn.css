@@ -1,0 +1,16 @@
+.header__btn {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 22px;
+  /* identical to box height, or 122% */
+  text-align: right;
+  color: #a9a9a9;
+  background-color: black;
+  outline: none;
+  border: none;
+  margin-left: 24px;
+}
+.header__btn:hover {
+  cursor: pointer;
+}

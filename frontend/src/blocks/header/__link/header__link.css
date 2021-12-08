@@ -1,0 +1,13 @@
+.header__link {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 22px;
+  text-decoration: none;
+  text-align: right;
+
+  color: #ffffff;
+}
+.header__link:visited {
+  color: white;
+}

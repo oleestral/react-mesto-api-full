@@ -1,0 +1,7 @@
+.login__link {
+  text-decoration: none;
+}
+.login__link:visited {
+  color: white;
+  opacity: 0.5;
+}

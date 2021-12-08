@@ -1,0 +1,6 @@
+.profile__info-add-button-image {
+    width: 22px;
+    height: 22px;
+    transform: rotate(45deg);
+    object-fit: fill;
+}

@@ -20,6 +20,11 @@ const corses = [
   "https://localhost:3000",
   "http://localhost:3001",
   "https://localhost:3001",
+  "https://oleestral.nomoredomains.work/",
+  "http://oleestral.nomoredomains.work/",
+  "https://api.oleestral.nomoredomains.work",
+  "http://api.oleestral.nomoredomains.work"
+
 ]
 
 const policy = (req, res, next) => {

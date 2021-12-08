@@ -88,7 +88,7 @@ class Api {
 }
 
 const api = new Api({
-  address: "http://localhost:3000",
+  address: "https://api.oleestral.nomoredomains.work",
   headers: {
     authorization: `Bearer ${localStorage.getItem("jwt")}`,
     "Content-Type": "application/json",

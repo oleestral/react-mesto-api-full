@@ -2,6 +2,8 @@ const express = require('express');
 
 const mongoose = require('mongoose');
 
+require('dotenv').config(); 
+
 const { celebrate, Joi, errors } = require('celebrate');
 const bodyParser = require('body-parser');
 const usersRouter = require('./routes/user');
@@ -13,6 +15,7 @@ const { requestLogger, errorLogger } = require('./middlewares/logger');
 const cors = require("cors");
 
 const { PORT = 3000 } = process.env;
+
 
 const app = express();
 const corses = [
@@ -26,25 +29,6 @@ const corses = [
   "http://api.oleestral.nomoredomains.work"
 
 ]
-
-const policy = (req, res, next) => {
-  const { origin } = req.headers;
-  if (corses.includes(origin)) {
-    res.header('Access-Control-Allow-Origin', origin);
-    res.header('Access-Control-Allow-Credentials', true);
-  }
-
-  const { method } = req;
-  const DEFAULT_ALLOWED_METHODS = 'GET,HEAD,PUT,PATCH,POST,DELETE';
-  const requestHeaders = req.headers['access-control-request-headers'];
-  if (method === 'OPTIONS') {
-    res.header('Access-Control-Allow-Methods', DEFAULT_ALLOWED_METHODS);
-    res.header('Access-Control-Allow-Headers', requestHeaders);
-    res.status(200).send({ message: 'OK' });
-  }
-
-  next();
-};
 
 // connect to server
 mongoose.connect('mongodb://localhost:27017/mestodb');

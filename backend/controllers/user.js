@@ -5,6 +5,7 @@ const NotFound = require('../errors/NotFound');
 const BadRequest = require('../errors/BadRequest');
 const Unauthorized = require('../errors/Unauthorized');
 const Conflict = require('../errors/Conflict');
+const { NODE_ENV, JWT_SECRET } = process.env;
 // controllers/users.js
 
 module.exports.getUsers = (req, res) => {
@@ -129,9 +130,7 @@ module.exports.login = (req, res, next) => {
           if (!matched) {
             next(new Error('Неправильные почта или пароль'));
           }
-          const token = jwt.sign({ _id: user.id }, 'super-strong-secret', {
-            expiresIn: '7d',
-          });
+          const token = jwt.sign({ _id: user.id }, NODE_ENV === 'production' ? JWT_SECRET : 'super-strong-secret',{ expiresIn: '7d' });
           return res.status(200).send({ token });
         })
         .catch((err) => {

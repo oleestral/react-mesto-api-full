@@ -45,11 +45,9 @@ function App() {
       .then(([info, card]) => {
         setCurrentUser(info);
         setCards(card);
-        console.log("у меня получилось")
       })
       .catch((err) => {
         console.log(err);
-        console.log("у меня не получилось")
       });
   }
 
@@ -135,7 +133,6 @@ function App() {
     api
       .changeLikeCardStatus(card._id, isLiked)
       .then((newCard) => {
-        console.log(newCard)
         setCards((state) =>
           state.map((c) => (c._id === card._id ? newCard : c))
         );
@@ -181,7 +178,6 @@ function App() {
 
   React.useEffect(() => {
     const jwt = localStorage.getItem("jwt");
-    console.log('токен у меня', jwt)
     auth
       .checkToken(jwt)
       .then((item) => {

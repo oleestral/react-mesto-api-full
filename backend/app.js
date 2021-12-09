@@ -12,31 +12,22 @@ const { createUser, login } = require('./controllers/user');
 const auth = require('./middlewares/auth');
 const NotFound = require('./errors/NotFound');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
-const cors = require("cors");
+const cors = require("./middlewares/cors");
 
 const { PORT = 3000 } = process.env;
 
 
 const app = express();
-const corses = [
-  "http://localhost:3000",
-  "https://localhost:3000",
-  "http://localhost:3001",
-  "https://localhost:3001",
-  "https://oleestral.nomoredomains.work/",
-  "http://oleestral.nomoredomains.work/",
-  "https://api.oleestral.nomoredomains.work",
-  "http://api.oleestral.nomoredomains.work"
-
-]
+app.use(cors)
 
 // connect to server
 mongoose.connect('mongodb://localhost:27017/mestodb');
+// app.use(policy)
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(requestLogger);
-app.use(cors(corses))
+// app.use(cors(corses))
 app.get('/crash-test', () => {
   setTimeout(() => {
     throw new Error('Сервер сейчас упадёт');

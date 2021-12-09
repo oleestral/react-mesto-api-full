@@ -3,18 +3,14 @@ const corses = [
     "https://localhost:3000",
     "http://localhost:3001",
     "https://localhost:3001",
-    "https://oleestral.nomoredomains.work/",
-    "http://oleestral.nomoredomains.work/",
-    "https://api.oleestral.nomoredomains.work",
-    "http://api.oleestral.nomoredomains.work"
-  
+    "https://oleestral.nomoredomains.work",
+    "http://oleestral.nomoredomains.work"
   ]
 
 module.exports = (req, res, next) => {
     const { origin } = req.headers;
     if (corses.includes(origin)) {
       res.header('Access-Control-Allow-Origin', origin);
-      res.header('Access-Control-Allow-Credentials', true);
     }
   
     const { method } = req;

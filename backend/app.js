@@ -22,7 +22,6 @@ app.use(cors)
 
 // connect to server
 mongoose.connect('mongodb://localhost:27017/mestodb');
-// app.use(policy)
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 

@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const Unauthorized = require('../errors/Unauthorized');
+
 const { NODE_ENV, JWT_SECRET } = process.env;
 
 // eslint-disable-next-line arrow-body-style

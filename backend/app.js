@@ -2,7 +2,7 @@ const express = require('express');
 
 const mongoose = require('mongoose');
 
-require('dotenv').config(); 
+require('dotenv').config();
 
 const { celebrate, Joi, errors } = require('celebrate');
 const bodyParser = require('body-parser');
@@ -12,13 +12,12 @@ const { createUser, login } = require('./controllers/user');
 const auth = require('./middlewares/auth');
 const NotFound = require('./errors/NotFound');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
-const cors = require("./middlewares/cors");
+const cors = require('./middlewares/cors');
 
 const { PORT = 3000 } = process.env;
 
-
 const app = express();
-app.use(cors)
+app.use(cors);
 
 // connect to server
 mongoose.connect('mongodb://localhost:27017/mestodb');
@@ -26,12 +25,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(requestLogger);
-// app.use(cors(corses))
 app.get('/crash-test', () => {
   setTimeout(() => {
     throw new Error('Сервер сейчас упадёт');
   }, 0);
-}); 
+});
 app.post(
   '/signin',
   celebrate({

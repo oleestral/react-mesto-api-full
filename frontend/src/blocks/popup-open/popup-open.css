@@ -1,13 +1,16 @@
 .popup-open {
-    background-color: #000000;
-    background: rgba(0,0,0,0.9);
+  background-color: #000000;
+  background: rgba(0, 0, 0, 0.9);
 }
 .popup-open > .popup-open__container {
-    visibility: hidden;
+  /* visibility: hidden;
   opacity: 0;
+  transition: visibility 0s, opacity 0.5s linear; */
+  visibility: visible;
+  opacity: 1;
   transition: visibility 0s, opacity 0.5s linear;
 }
 .popup-open:hover > .popup-open__container {
-    visibility: visible;
+  visibility: visible;
   opacity: 1;
 }

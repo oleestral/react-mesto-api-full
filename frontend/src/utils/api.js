@@ -10,10 +10,13 @@ class Api {
     return res.json();
   }
   //user information
-  getUserInfo() {
+  getUserInfo(token) {
     return fetch(`${this._address}/users/me`, {
       method: "GET",
-      headers: this._headers,
+      headers: {
+        "Content-Type": "application/json",
+        "authorization": `Bearer ${token}`
+      },
     }).then(this._getResponseData);
   }
   //edit user profile
@@ -28,10 +31,13 @@ class Api {
     }).then(this._getResponseData);
   }
   //get Initial Cards
-  getInitialCards() {
+  getInitialCards(token) {
     return fetch(`${this._address}/cards`, {
       method: "GET",
-      headers: this._headers,
+      headers: {
+        "Content-Type": "application/json",
+        "authorization": `Bearer ${token}`
+      },
     }).then(this._getResponseData);
   }
   //add user's cards

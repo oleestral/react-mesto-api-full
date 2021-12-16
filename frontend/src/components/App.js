@@ -40,8 +40,8 @@ function App() {
     React.useState(false);
 
   // user data & initial cards
-  function getGeneralData() {
-    Promise.all([api.getUserInfo(), api.getInitialCards()])
+  function getGeneralData(token) {
+    Promise.all([api.getUserInfo(token), api.getInitialCards(token)])
       .then(([info, card]) => {
         setCurrentUser(info);
         setCards(card);
@@ -149,6 +149,7 @@ function App() {
         localStorage.setItem("jwt", item.token);
         setLoggedIn(true);
         setEmail(email);
+        getGeneralData(item.token)
       })
       .catch((err) => {
         console.log(err);
@@ -182,14 +183,12 @@ function App() {
       .then((item) => {
         setLoggedIn(true);
         setEmail(item.email);
-        if(item) {
-          getGeneralData()
-        }
+        getGeneralData(jwt)
       })
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [loggedIn, isEditProfilePopupOpen, isEditAvatarPopupOpen]);
 
   // closing popups by Escape
   React.useEffect(() => {
@@ -206,7 +205,7 @@ function App() {
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
-      <div className="root" id="root">
+      <div className="root">
         <div className="page">
           <BrowserRouter>
             <Header email={email} onLogOut={handleLogOut} loggedIn={loggedIn} />

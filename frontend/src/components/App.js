@@ -149,7 +149,6 @@ function App() {
         localStorage.setItem("jwt", item.token);
         setLoggedIn(true);
         setEmail(email);
-        console.log(email);
       })
       .catch((err) => {
         console.log(err);

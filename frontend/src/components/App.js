@@ -53,8 +53,9 @@ function App() {
 
   //delete card
   function handleDeleteClick(card) {
+    const jwt = localStorage.getItem("jwt");
     api
-      .removeUserCards(card._id)
+      .removeUserCards(card._id, jwt)
       .then(() => {
         setCards((state) => state.filter((c) => c._id !== card._id));
       })
@@ -64,8 +65,9 @@ function App() {
   }
   // update user profile
   function handleUpdateUser({ name, about }) {
+    const jwt = localStorage.getItem("jwt");
     api
-      .editUserProfile(name, about)
+      .editUserProfile(name, about, jwt)
       .then((info) => {
         setCurrentUser(info);
         closeAllPopups();
@@ -76,8 +78,9 @@ function App() {
   }
   // update user avatar
   function handleUpdateAvatar(link) {
+    const jwt = localStorage.getItem("jwt");
     api
-      .updateUserAvatar(link)
+      .updateUserAvatar(link, jwt)
       .then((info) => {
         setCurrentUser(info);
         closeAllPopups();
@@ -88,8 +91,9 @@ function App() {
   }
   // add card
   function handleAddCard({ name, link }) {
+    const jwt = localStorage.getItem("jwt");
     api
-      .addUserCards(name, link)
+      .addUserCards(name, link, jwt)
       .then((newCard) => {
         setCards([newCard, ...cards]);
         closeAllPopups();
@@ -127,11 +131,12 @@ function App() {
   }
   // like
   function handleCardLike(card) {
+    const jwt = localStorage.getItem("jwt");
     // Снова проверяем, есть ли уже лайк на этой карточке
     const isLiked = card.likes.some((i) => i === currentUser._id);
     // Отправляем запрос в API и получаем обновлённые данные карточки
     api
-      .changeLikeCardStatus(card._id, isLiked)
+      .changeLikeCardStatus(card._id, isLiked, jwt)
       .then((newCard) => {
         setCards((state) =>
           state.map((c) => (c._id === card._id ? newCard : c))
@@ -149,7 +154,6 @@ function App() {
         localStorage.setItem("jwt", item.token);
         setLoggedIn(true);
         setEmail(email);
-        getGeneralData(item.token)
       })
       .catch((err) => {
         console.log(err);
@@ -178,7 +182,7 @@ function App() {
 
   React.useEffect(() => {
     const jwt = localStorage.getItem("jwt");
-    auth
+      auth
       .checkToken(jwt)
       .then((item) => {
         setLoggedIn(true);
@@ -188,7 +192,8 @@ function App() {
       .catch((err) => {
         console.log(err);
       });
-  }, [loggedIn, isEditProfilePopupOpen, isEditAvatarPopupOpen]);
+    
+  }, [loggedIn, isEditProfilePopupOpen, isEditAvatarPopupOpen, history]);
 
   // closing popups by Escape
   React.useEffect(() => {

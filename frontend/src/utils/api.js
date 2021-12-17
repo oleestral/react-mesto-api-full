@@ -1,7 +1,6 @@
 class Api {
-  constructor({ address, headers }) {
+  constructor({ address }) {
     this._address = address;
-    this._headers = headers;
   }
   _getResponseData(res) {
     if (!res.ok) {
@@ -20,10 +19,13 @@ class Api {
     }).then(this._getResponseData);
   }
   //edit user profile
-  editUserProfile(name, about) {
+  editUserProfile(name, about, token) {
     return fetch(`${this._address}/users/me`, {
       method: "PATCH",
-      headers: this._headers,
+      headers: {
+        "Content-Type": "application/json",
+        "authorization": `Bearer ${token}`
+      },
       body: JSON.stringify({
         name: name,
         about: about,
@@ -41,10 +43,13 @@ class Api {
     }).then(this._getResponseData);
   }
   //add user's cards
-  addUserCards(name, link) {
+  addUserCards(name, link, token) {
     return fetch(`${this._address}/cards`, {
       method: "POST",
-      headers: this._headers,
+      headers: {
+        "Content-Type": "application/json",
+        "authorization": `Bearer ${token}`
+      },
       body: JSON.stringify({
         name: name,
         link: link,
@@ -52,10 +57,13 @@ class Api {
     }).then(this._getResponseData);
   }
   //remove user's card
-  removeUserCards(id) {
+  removeUserCards(id, token) {
     return fetch(`${this._address}/cards/${id}`, {
       method: "DELETE",
-      headers: this._headers,
+      headers: {
+        "Content-Type": "application/json",
+        "authorization": `Bearer ${token}`
+      },
     }).then(this._getResponseData);
   }
   //like post
@@ -75,29 +83,31 @@ class Api {
     }).then(this._getResponseData);
   }
   //update user avatar
-  updateUserAvatar(info) {
+  updateUserAvatar(info, token) {
     return fetch(`${this._address}/users/me/avatar`, {
       method: "PATCH",
-      headers: this._headers,
+      headers: {
+        "Content-Type": "application/json",
+        "authorization": `Bearer ${token}`
+      },
       body: JSON.stringify({
         avatar: info.avatar,
       }),
     }).then(this._getResponseData);
   }
-  changeLikeCardStatus(id, isLiked) {
+  changeLikeCardStatus(id, isLiked, token) {
     const method = isLiked ? "DELETE" : "PUT";
     return fetch(`${this._address}/cards/${id}/likes`, {
       method: method,
-      headers: this._headers,
+      headers: {
+        "Content-Type": "application/json",
+        "authorization": `Bearer ${token}`
+      },
     }).then(this._getResponseData);
   }
 }
 
 const api = new Api({
   address: "https://api.oleestral.nomoredomains.work",
-  headers: {
-    authorization: `Bearer ${localStorage.getItem("jwt")}`,
-    "Content-Type": "application/json",
-  },
 });
 export default api;

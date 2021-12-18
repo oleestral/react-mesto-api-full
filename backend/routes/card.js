@@ -16,14 +16,12 @@ cardRouter.post(
       name: Joi.string().required().min(2).max(30),
       link: Joi.string()
         .regex(
-          // eslint-disable-next-line comma-dangle
-          /^((http|https):\/\/)?(www\.)?([A-Za-zА-Яа-я0-9]{1}[A-Za-zА-Яа-я0-9\\-]*\.?)*\.{1}[A-Za-zА-Яа-я0-9-]{2,8}(\/([\w#!:.?+=&%@!\-\\/])*)?/
+          /^((http|https):\/\/)?(www\.)?([A-Za-zА-Яа-я0-9]{1}[A-Za-zА-Яа-я0-9\\-]*\.?)*\.{1}[A-Za-zА-Яа-я0-9-]{2,8}(\/([\w#!:.?+=&%@!\-\\/])*)?/,
         )
         .required(),
     }),
   }),
-  // eslint-disable-next-line comma-dangle
-  createCard
+  createCard,
 );
 
 cardRouter.delete(
@@ -33,8 +31,7 @@ cardRouter.delete(
       cardId: Joi.string().length(24).hex(),
     }),
   }),
-  // eslint-disable-next-line comma-dangle
-  deleteCard
+  deleteCard,
 );
 cardRouter.put(
   '/cards/:cardId/likes',
@@ -43,8 +40,7 @@ cardRouter.put(
       cardId: Joi.string().length(24).hex(),
     }),
   }),
-  // eslint-disable-next-line comma-dangle
-  like
+  like,
 );
 cardRouter.delete(
   '/cards/:cardId/likes',
@@ -53,8 +49,7 @@ cardRouter.delete(
       cardId: Joi.string().length(24).hex(),
     }),
   }),
-  // eslint-disable-next-line comma-dangle
-  dislike
+  dislike,
 );
 
 module.exports = cardRouter;

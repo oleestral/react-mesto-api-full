@@ -6,6 +6,7 @@ require('dotenv').config();
 
 const { celebrate, Joi, errors } = require('celebrate');
 const bodyParser = require('body-parser');
+const helmet = require('helmet');
 const usersRouter = require('./routes/user');
 const cardsRouter = require('./routes/card');
 const { createUser, login } = require('./controllers/user');
@@ -17,6 +18,8 @@ const cors = require('./middlewares/cors');
 const { PORT = 3000 } = process.env;
 
 const app = express();
+app.use(helmet());
+app.use(requestLogger);
 app.use(cors);
 
 // connect to server
@@ -24,7 +27,6 @@ mongoose.connect('mongodb://localhost:27017/mestodb');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(requestLogger);
 app.get('/crash-test', () => {
   setTimeout(() => {
     throw new Error('Сервер сейчас упадёт');
@@ -38,8 +40,7 @@ app.post(
       password: Joi.string().required().min(8),
     }),
   }),
-  // eslint-disable-next-line comma-dangle
-  login
+  login,
 );
 app.post(
   '/signup',
@@ -50,13 +51,11 @@ app.post(
       name: Joi.string().min(2).max(30),
       about: Joi.string().min(2).max(30),
       avatar: Joi.string().pattern(
-        // eslint-disable-next-line comma-dangle
-        /^((http|https):\/\/)?(www\.)?([A-Za-zА-Яа-я0-9]{1}[A-Za-zА-Яа-я0-9\\-]*\.?)*\.{1}[A-Za-zА-Яа-я0-9-]{2,8}(\/([\w#!:.?+=&%@!\-\\/])*)?/
+        /^((http|https):\/\/)?(www\.)?([A-Za-zА-Яа-я0-9]{1}[A-Za-zА-Яа-я0-9\\-]*\.?)*\.{1}[A-Za-zА-Яа-я0-9-]{2,8}(\/([\w#!:.?+=&%@!\-\\/])*)?/,
       ),
     }),
   }),
-  // eslint-disable-next-line comma-dangle
-  createUser
+  createUser,
 );
 
 app.use(auth);
@@ -79,5 +78,3 @@ app.use((err, req, res, next) => {
 app.listen(PORT, () => {
   console.log(`App listening on port ${PORT}`);
 });
-// когда-нибудь я перестану вас мучать своим проектом, но это будет совсем другая история.
-// Простите, уж очень сложно он у меня идет.

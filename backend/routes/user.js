@@ -20,8 +20,7 @@ userRouter.get(
       id: Joi.string().length(24).hex(),
     }),
   }),
-  // eslint-disable-next-line comma-dangle
-  getUserById
+  getUserById,
 );
 userRouter.patch(
   '/users/me',
@@ -31,8 +30,7 @@ userRouter.patch(
       about: Joi.string().required().min(2),
     }),
   }),
-  // eslint-disable-next-line comma-dangle
-  updateUserInfo
+  updateUserInfo,
 );
 userRouter.patch(
   '/users/me/avatar',
@@ -40,14 +38,12 @@ userRouter.patch(
     body: Joi.object().keys({
       avatar: Joi.string()
         .regex(
-          // eslint-disable-next-line comma-dangle
-          /^((http|https):\/\/)?(www\.)?([A-Za-zА-Яа-я0-9]{1}[A-Za-zА-Яа-я0-9\\-]*\.?)*\.{1}[A-Za-zА-Яа-я0-9-]{2,8}(\/([\w#!:.?+=&%@!\-\\/])*)?/
+          /^((http|https):\/\/)?(www\.)?([A-Za-zА-Яа-я0-9]{1}[A-Za-zА-Яа-я0-9\\-]*\.?)*\.{1}[A-Za-zА-Яа-я0-9-]{2,8}(\/([\w#!:.?+=&%@!\-\\/])*)?/,
         )
         .required(),
     }),
   }),
-  // eslint-disable-next-line comma-dangle
-  updateAvatar
+  updateAvatar,
 );
 
 module.exports = userRouter;

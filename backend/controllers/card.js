@@ -24,8 +24,7 @@ module.exports.createCard = (req, res, next) => {
       } else {
         next(err);
       }
-    })
-    .catch(next);
+    });
 };
 module.exports.deleteCard = (req, res, next) => {
   card
@@ -46,8 +45,7 @@ module.exports.deleteCard = (req, res, next) => {
       } else {
         next(err);
       }
-    })
-    .catch(next);
+    });
 };
 module.exports.like = (req, res, next) => {
   card
@@ -56,8 +54,7 @@ module.exports.like = (req, res, next) => {
       {
         $addToSet: { likes: req.user._id },
       },
-      // eslint-disable-next-line comma-dangle
-      { new: true }
+      { new: true },
     )
     .orFail(new Error('NotFound'))
     .then((like) => {
@@ -73,8 +70,7 @@ module.exports.like = (req, res, next) => {
       } else {
         next(err);
       }
-    })
-    .catch(next);
+    });
 };
 module.exports.dislike = (req, res, next) => {
   card
@@ -83,8 +79,7 @@ module.exports.dislike = (req, res, next) => {
       {
         $pull: { likes: req.user._id },
       },
-      // eslint-disable-next-line comma-dangle
-      { new: true }
+      { new: true },
     )
     .orFail(new Error('NotFound'))
     .then((like) => {
@@ -100,6 +95,5 @@ module.exports.dislike = (req, res, next) => {
       } else {
         next(err);
       }
-    })
-    .catch(next);
+    });
 };

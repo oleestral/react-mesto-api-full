@@ -3,12 +3,8 @@ const Unauthorized = require('../errors/Unauthorized');
 
 const { NODE_ENV, JWT_SECRET } = process.env;
 
-// eslint-disable-next-line arrow-body-style
-const extractBearerToken = (header) => {
-  return header.replace('Bearer ', '');
-};
+const extractBearerToken = (header) => header.replace('Bearer ', '');
 
-// eslint-disable-next-line consistent-return
 module.exports = (req, res, next) => {
   const { authorization } = req.headers;
 

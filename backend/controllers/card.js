@@ -33,9 +33,10 @@ module.exports.deleteCard = (req, res, next) => {
     .then((item) => {
       if (req.user._id !== item.owner.toString()) {
         next(new Error('Нельзя удалять чужие посты!'));
+      } else {
+        item.remove();
+        res.status(200).send({ message: 'Карточка успешно удалена!' });
       }
-      item.remove();
-      res.status(200).send({ message: 'Карточка успешно удалена!' });
     })
     .catch((err) => {
       if (err.name === 'CastError') {

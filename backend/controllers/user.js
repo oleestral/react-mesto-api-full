@@ -116,6 +116,7 @@ module.exports.login = (req, res, next) => {
       } else {
         bcrypt
           .compare(password, user.password)
+
           .then((matched) => {
             if (!matched) {
               next(new Error('Неправильные почта или пароль'));
@@ -138,7 +139,8 @@ module.exports.getCurrentUser = (req, res, next) => {
     .catch((err) => {
       if (err.name === 'CastError') {
         next(new BadRequest('Неверный id'));
+      } else {
+        next(err);
       }
-      next(err);
     });
 };

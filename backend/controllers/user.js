@@ -119,10 +119,11 @@ module.exports.login = (req, res, next) => {
 
           .then((matched) => {
             if (!matched) {
-              next(new Error('Неправильные почта или пароль'));
+              throw (new Error('Неправильные почта или пароль'));
+            } else {
+              const token = jwt.sign({ _id: user.id }, NODE_ENV === 'production' ? JWT_SECRET : 'super-strong-secret', { expiresIn: '7d' });
+              return res.status(200).send({ token });
             }
-            const token = jwt.sign({ _id: user.id }, NODE_ENV === 'production' ? JWT_SECRET : 'super-strong-secret', { expiresIn: '7d' });
-            return res.status(200).send({ token });
           })
           .catch(next);
       }
